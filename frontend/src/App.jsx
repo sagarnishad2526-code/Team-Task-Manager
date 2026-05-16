@@ -12,32 +12,7 @@ import api from './api';
 import './index.css';
 
 
-/* ---- Floating orbs background ---- */
-function Background() {
-  return (
-    <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
-      <div style={{
-        position: 'absolute', width: '600px', height: '600px',
-        borderRadius: '50%', top: '-200px', left: '-150px',
-        background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)',
-        filter: 'blur(40px)',
-      }} />
-      <div style={{
-        position: 'absolute', width: '500px', height: '500px',
-        borderRadius: '50%', bottom: '-100px', right: '-100px',
-        background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)',
-        filter: 'blur(40px)',
-      }} />
-      <div style={{
-        position: 'absolute', width: '300px', height: '300px',
-        borderRadius: '50%', top: '40%', left: '60%',
-        background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)',
-        filter: 'blur(30px)',
-        animation: 'float 8s ease-in-out infinite',
-      }} />
-    </div>
-  );
-}
+/* Background removed — clean minimal dark theme */
 
 /* ---- Global Search Bar ---- */
 function GlobalSearch() {
@@ -158,78 +133,97 @@ function Sidebar({ isOpen, toggleSidebar }) {
   const navigate = useNavigate();
   if (!user) return null;
 
-  const roleColor = user.role === 'admin' ? 'var(--accent)' : 'var(--done)';
-  
+  const roleColor = user.role === 'admin' ? '#6366f1' : '#10b981';
+
   const navLinkStyle = ({ isActive }) => ({
-    color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
+    color: isActive ? '#fafafa' : '#71717a',
     fontWeight: isActive ? 600 : 500,
-    fontSize: '0.95rem',
+    fontSize: '0.875rem',
     textDecoration: 'none',
-    padding: '12px 16px',
+    padding: '8px 12px',
     borderRadius: '8px',
-    background: isActive ? 'rgba(99,102,241,0.15)' : 'transparent',
-    border: isActive ? '1px solid rgba(99,102,241,0.25)' : '1px solid transparent',
-    transition: 'all 0.2s',
+    background: isActive ? 'rgba(99,102,241,0.1)' : 'transparent',
+    border: isActive ? '1px solid rgba(99,102,241,0.18)' : '1px solid transparent',
+    transition: 'all 0.15s',
     display: 'flex',
     alignItems: 'center',
-    gap: '12px'
+    gap: '10px',
   });
+
+  const navHover = (e, active) => {
+    if (!active) e.currentTarget.style.background = '#18181b';
+  };
+  const navLeave = (e, active) => {
+    if (!active) e.currentTarget.style.background = 'transparent';
+  };
 
   return (
     <>
-      {/* Mobile overlay */}
       {isOpen && <div className="sidebar-overlay" onClick={toggleSidebar} />}
-      
       <aside className={`tf-sidebar ${isOpen ? 'open' : ''}`}>
-        <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
+        {/* Logo */}
+        <div style={{ padding: '1.25rem 1rem', borderBottom: '1px solid #1e1e21', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
-              width: '32px', height: '32px', borderRadius: '8px',
-              background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
+              width: '30px', height: '30px', borderRadius: '8px',
+              background: '#6366f1',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '16px', boxShadow: '0 4px 12px var(--accent-glow)',
-            }}>⚡</div>
-            <span style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--text-primary)', letterSpacing: '-0.3px' }}>
-              Task<span style={{ color: 'var(--accent)' }}>Flow</span>
+            }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+              </svg>
+            </div>
+            <span style={{ fontWeight: 700, fontSize: '1rem', color: '#fafafa', letterSpacing: '-0.3px' }}>
+              Task<span style={{ color: '#6366f1' }}>Flow</span>
             </span>
           </div>
           <button className="mobile-only close-sidebar" onClick={toggleSidebar}>×</button>
         </div>
 
-        <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        {/* Nav items */}
+        <div style={{ padding: '1rem 0.75rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          <div className="section-title">Navigation</div>
           <NavLink to="/dashboard" style={navLinkStyle} onClick={toggleSidebar}>
-            <span>🏠</span> Dashboard
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+            </svg>
+            Dashboard
           </NavLink>
           <NavLink to="/workspaces" style={navLinkStyle} onClick={toggleSidebar}>
-            <span>🏢</span> Workspaces
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/>
+            </svg>
+            Workspaces
           </NavLink>
           <NavLink to="/projects" style={navLinkStyle} onClick={toggleSidebar}>
-            <span>📁</span> Projects
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+            </svg>
+            Projects
           </NavLink>
         </div>
 
-        <div style={{ padding: '1.5rem', borderTop: '1px solid var(--glass-border)' }}>
+        {/* User info */}
+        <div style={{ padding: '1rem 0.75rem', borderTop: '1px solid #1e1e21' }}>
           <div style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            background: 'var(--glass-bg)', border: '1px solid var(--glass-border)',
-            borderRadius: '10px', padding: '10px', marginBottom: '1rem'
+            display: 'flex', alignItems: 'center', gap: '10px',
+            background: '#18181b', border: '1px solid #27272a',
+            borderRadius: '10px', padding: '10px', marginBottom: '0.75rem'
           }}>
             <div style={{
-              width: '32px', height: '32px', borderRadius: '50%',
-              background: `linear-gradient(135deg, var(--accent), var(--accent-2))`,
+              width: '32px', height: '32px', borderRadius: '8px',
+              background: '#6366f1',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '0.9rem', fontWeight: 700, color: 'white', flexShrink: 0
+              fontSize: '0.85rem', fontWeight: 700, color: 'white', flexShrink: 0,
             }}>
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div style={{ flex: 1, overflow: 'hidden' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-primary)', fontWeight: 600, whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+              <div style={{ fontSize: '0.85rem', color: '#fafafa', fontWeight: 600, whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                 {user.name}
               </div>
-              <div style={{
-                fontSize: '0.65rem', fontWeight: 700,
-                color: roleColor, textTransform: 'uppercase', letterSpacing: '0.5px',
-              }}>
+              <div style={{ fontSize: '0.65rem', fontWeight: 700, color: roleColor, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {user.role}
               </div>
             </div>
@@ -237,9 +231,9 @@ function Sidebar({ isOpen, toggleSidebar }) {
           <button
             onClick={() => { logout(); navigate('/login'); }}
             className="tf-btn tf-btn-ghost"
-            style={{ width: '100%', padding: '10px', fontSize: '0.85rem' }}
+            style={{ width: '100%', fontSize: '0.82rem', padding: '8px' }}
           >
-            Logout
+            Sign out
           </button>
         </div>
       </aside>
@@ -290,20 +284,17 @@ function AppLayout({ children }) {
   const toggle = () => setSidebarOpen(p => !p);
 
   return (
-    <div className="app-bg" style={{ position: 'relative', display: 'flex', minHeight: '100vh' }}>
-      <Background />
+    <div className="app-bg" style={{ display: 'flex', minHeight: '100vh' }}>
       {user && <Sidebar isOpen={sidebarOpen} toggleSidebar={toggle} />}
-      <div style={{ flex: 1, position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-        {/* Mobile topbar (shown on small screens) */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
         {user && <MobileTopBar toggleSidebar={toggle} />}
-        {/* Desktop search strip (hidden on mobile, handled by MobileTopBar) */}
         {user && (
           <div className="desktop-search-bar" style={{
-            padding: '0.875rem 2rem',
-            background: 'rgba(6,9,24,0.6)', backdropFilter: 'blur(20px)',
-            borderBottom: '1px solid var(--glass-border)',
+            padding: '0.75rem 1.5rem',
+            background: '#111113',
+            borderBottom: '1px solid #1e1e21',
             display: 'flex', alignItems: 'center', gap: '1rem',
-            position: 'sticky', top: 0, zIndex: 89
+            position: 'sticky', top: 0, zIndex: 89,
           }}>
             <GlobalSearch />
           </div>

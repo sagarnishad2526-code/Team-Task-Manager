@@ -99,7 +99,45 @@ app.get('/api/dashboard', auth, async (req, res) => {
       ]
     });
 
-    res.json({ stats, recentTasks: mappedTasks.slice(0, 6), overdueTasks: overdue.slice(0, 5), workspaceCount: workspaces.length });
+    // Chart data — Task Status Donut
+    const tasksByStatus = [
+      { name: 'To Do',       value: stats.todo,       color: '#6366f1' },
+      { name: 'In Progress', value: stats.inProgress, color: '#f59e0b' },
+      { name: 'In Review',   value: stats.review,     color: '#3b82f6' },
+      { name: 'Done',        value: stats.done,       color: '#10b981' },
+    ].filter(s => s.value > 0);
+
+    // Chart data — Priority Bar
+    const tasksByPriority = [
+      { name: 'Low',      value: mappedTasks.filter(t => t.priority === 'low').length,      color: '#64748b' },
+      { name: 'Medium',   value: mappedTasks.filter(t => t.priority === 'medium').length,   color: '#f59e0b' },
+      { name: 'High',     value: mappedTasks.filter(t => t.priority === 'high').length,     color: '#ef4444' },
+      { name: 'Critical', value: mappedTasks.filter(t => t.priority === 'critical').length, color: '#dc2626' },
+    ];
+
+    // Chart data — Project Workload
+    const projectMap = {};
+    mappedTasks.forEach(t => {
+      const key = t.project_name || 'Unknown';
+      projectMap[key] = (projectMap[key] || 0) + 1;
+    });
+    const projectWorkload = Object.entries(projectMap)
+      .map(([project, tasks]) => ({ project, tasks }))
+      .sort((a, b) => b.tasks - a.tasks)
+      .slice(0, 6);
+
+    const completionRate = stats.total > 0 ? Math.round((stats.done / stats.total) * 100) : 0;
+
+    res.json({
+      stats,
+      recentTasks: mappedTasks.slice(0, 8),
+      overdueTasks: overdue.slice(0, 8),
+      workspaceCount: workspaces.length,
+      tasksByStatus,
+      tasksByPriority,
+      projectWorkload,
+      completionRate,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

@@ -123,49 +123,51 @@ function WorkspaceCard({ workspace, onClick }) {
   return (
     <div
       onClick={onClick}
-      className="glass-card"
-      style={{ cursor: 'pointer', padding: '1.5rem', position: 'relative', overflow: 'hidden' }}
+      style={{
+        background: '#111113', border: '1px solid #27272a',
+        borderLeft: '3px solid #6366f1',
+        borderRadius: 'var(--radius)', cursor: 'pointer',
+        padding: '1.5rem', position: 'relative', overflow: 'hidden',
+        transition: 'all 0.2s',
+      }}
+      onMouseEnter={e => { e.currentTarget.style.background = '#18181b'; e.currentTarget.style.borderColor = '#3f3f46'; }}
+      onMouseLeave={e => { e.currentTarget.style.background = '#111113'; e.currentTarget.style.borderColor = '#27272a'; }}
     >
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: '3px',
-        background: `linear-gradient(90deg, var(--accent), var(--accent-2))`,
-      }} />
-
-      <h3 style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '1.1rem', lineHeight: 1.3, marginBottom: '0.5rem' }}>
+      <h3 style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '1rem', lineHeight: 1.3, marginBottom: '0.5rem' }}>
         {workspace.name}
       </h3>
       
       {workspace.description && (
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1rem', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.83rem', marginBottom: '1rem', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
           {workspace.description}
         </p>
       )}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: workspace.description ? '0' : '1.5rem', marginBottom: '0.5rem' }}>
-        <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-          <Users size={14} /> {workspace.membersCount || 0} members
+        <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+          <Users size={13} /> {workspace.membersCount || 0} members
         </span>
-        <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-          <FolderKanban size={14} /> {workspace.projectsCount || 0} projects
+        <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+          <FolderKanban size={13} /> {workspace.projectsCount || 0} projects
         </span>
       </div>
       
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.75rem', marginTop: 'auto' }}>
-        <div style={{ display: 'flex', gap: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #1e1e21', paddingTop: '0.75rem', marginTop: 'auto' }}>
+        <div style={{ display: 'flex', gap: '6px' }}>
           {workspace.category && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.65rem', fontWeight: 600, padding: '2px 8px', borderRadius: '6px', background: 'rgba(99,102,241,0.1)', color: 'var(--accent)', textTransform: 'uppercase' }}>
-              <Tag size={10} /> {workspace.category}
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.63rem', fontWeight: 700, padding: '2px 7px', borderRadius: '4px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+              <Tag size={9} /> {workspace.category}
             </span>
           )}
           {workspace.visibility && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.65rem', fontWeight: 600, padding: '2px 8px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-              <Eye size={10} /> {workspace.visibility}
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.63rem', fontWeight: 600, padding: '2px 7px', borderRadius: '4px', background: '#18181b', color: 'var(--text-muted)', textTransform: 'uppercase', border: '1px solid #27272a' }}>
+              <Eye size={9} /> {workspace.visibility}
             </span>
           )}
         </div>
         {workspace.createdAt && (
-          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-            <CalendarDays size={12} /> {new Date(workspace.createdAt).toLocaleDateString()}
+          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', color: '#3f3f46' }}>
+            <CalendarDays size={11} /> {new Date(workspace.createdAt).toLocaleDateString()}
           </span>
         )}
       </div>
@@ -209,8 +211,7 @@ export default function Workspaces() {
       ) : workspaces.length === 0 ? (
         <div style={{
           textAlign: 'center', padding: '5rem 2rem',
-          background: 'var(--glass-bg)', backdropFilter: 'blur(20px)',
-          border: '1px solid var(--glass-border)', borderRadius: 'var(--radius)',
+          background: '#111113', border: '1px solid #27272a', borderRadius: 'var(--radius)',
           animation: 'fadeUp 0.5s ease forwards',
         }}>
           <Building2 size={48} color="var(--text-muted)" style={{ marginBottom: '1rem', opacity: 0.5 }} />

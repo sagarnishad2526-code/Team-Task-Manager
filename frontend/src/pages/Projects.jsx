@@ -25,9 +25,8 @@ function ProjectCard({ project, onDelete }) {
   
   return (
     <div style={{
-      background: 'rgba(255,255,255,0.03)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid var(--glass-border)',
+      background: '#111113',
+      border: `1px solid #27272a`,
       borderLeft: `3px solid ${sc}`,
       borderRadius: 'var(--radius)',
       padding: '1.5rem',
@@ -37,8 +36,8 @@ function ProjectCard({ project, onDelete }) {
       flexDirection: 'column',
       transition: 'all 0.2s',
     }}
-    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+    onMouseEnter={e => { e.currentTarget.style.background = '#18181b'; e.currentTarget.style.borderColor = '#3f3f46'; }}
+    onMouseLeave={e => { e.currentTarget.style.background = '#111113'; e.currentTarget.style.borderColor = '#27272a'; }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem', gap: '10px' }}>
         <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, flex: 1, wordBreak: 'break-word' }}>
@@ -70,7 +69,7 @@ function ProjectCard({ project, onDelete }) {
         {project.description || 'No description provided.'}
       </p>
       
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid #1e1e21' }}>
         {project.priority && (
           <div style={{ fontSize: '0.75rem', color: pm.color, fontWeight: 600, background: pm.color + '15', padding: '2px 8px', borderRadius: '6px' }}>
             {pm.label} Priority
@@ -230,24 +229,24 @@ export default function Projects() {
         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
           {/* View toggle — shown to all users */}
           <div style={{
-            display: 'flex', background: 'rgba(255,255,255,0.05)', borderRadius: '8px',
-            border: '1px solid var(--glass-border)', overflow: 'hidden'
+            display: 'flex', background: '#111113', borderRadius: '8px',
+            border: '1px solid #27272a', overflow: 'hidden'
           }}>
             <button
               onClick={() => setViewAll(false)}
               style={{
-                padding: '8px 14px', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'inherit',
-                background: !viewAll ? 'rgba(99,102,241,0.25)' : 'transparent',
-                color: !viewAll ? 'var(--accent)' : 'var(--text-muted)',
-                transition: 'all 0.2s'
+                padding: '7px 14px', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'inherit',
+                background: !viewAll ? 'rgba(99,102,241,0.15)' : 'transparent',
+                color: !viewAll ? '#6366f1' : '#71717a',
+                transition: 'all 0.15s'
               }}>My Projects</button>
             <button
               onClick={() => setViewAll(true)}
               style={{
-                padding: '8px 14px', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'inherit',
-                background: viewAll ? 'rgba(99,102,241,0.25)' : 'transparent',
-                color: viewAll ? 'var(--accent)' : 'var(--text-muted)',
-                transition: 'all 0.2s'
+                padding: '7px 14px', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'inherit',
+                background: viewAll ? 'rgba(99,102,241,0.15)' : 'transparent',
+                color: viewAll ? '#6366f1' : '#71717a',
+                transition: 'all 0.15s'
               }}>All Projects</button>
           </div>
           {/* All users can create projects */}
@@ -262,7 +261,7 @@ export default function Projects() {
           {[1,2,3].map(i => <div key={i} className="skeleton" style={{ height: '150px', width: '300px', borderRadius: '12px' }} />)}
         </div>
       ) : projects.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '4rem 2rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px dashed rgba(255,255,255,0.1)' }}>
+        <div style={{ textAlign: 'center', padding: '4rem 2rem', background: '#111113', borderRadius: '16px', border: '1px dashed #27272a' }}>
           <FolderOpen size={48} color="var(--text-muted)" style={{ marginBottom: '1rem', opacity: 0.5 }} />
           <h3 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
             {!viewAll ? 'No projects in your workspaces yet' : 'No projects found'}
