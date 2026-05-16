@@ -2,7 +2,7 @@
 
 TaskFlow is a modern, full-stack team task management application built with the **MERN Stack** (MongoDB, Express, React, Node.js). Designed with a premium, high-contrast minimalistic dark UI, TaskFlow provides teams with the necessary tools to organize workspaces, manage projects, track tasks, and analyze productivity metrics seamlessly.
 
-![TaskFlow Dashboard](https://github.com/sagarnishad2526-code/Team-Task-Manager/assets/placeholder-if-needed)
+[TaskFlow Dashboard]((https://team-task-manager-production-f754.up.railway.app/))
 
 ## ✨ Features
 
