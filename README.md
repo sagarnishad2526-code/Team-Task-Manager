@@ -1,139 +1,107 @@
-# TaskFlow — Team Task Manager
+# TaskFlow — Enterprise Team Task Manager
 
-A full-stack team task management application with role-based access control, project tracking, and a glassmorphic dark UI.
+TaskFlow is a modern, full-stack team task management application built with the **MERN Stack** (MongoDB, Express, React, Node.js). Designed with a premium, high-contrast minimalistic dark UI, TaskFlow provides teams with the necessary tools to organize workspaces, manage projects, track tasks, and analyze productivity metrics seamlessly.
 
-## 🔗 Live Demo
-
-> **Deployed on Railway** — https://team-task-manager-production-2e084.up.railway.app
+![TaskFlow Dashboard](https://github.com/sagarnishad2526-code/Team-Task-Manager/assets/placeholder-if-needed)
 
 ## ✨ Features
 
-- **Authentication** — JWT-based signup/login with Admin & Member roles
-- **Projects** — Create, manage and track projects with deadlines and progress
-- **Task Management** — Create tasks with priority levels, due dates, and assignees
-- **Kanban Board** — Visual drag-like board with Todo / In Progress / Review / Done columns
-- **Dashboard** — Stats overview with recent tasks and overdue alerts
-- **Role-Based Access** — Admins manage members; members contribute to assigned projects
-- **Immersive UI** — Dark glassmorphism with animated backgrounds and micro-interactions
+- **Professional Dashboard:** Real-time metrics, KPI cards, and Recharts-powered data visualization (donut charts, bar charts, completion trends).
+- **Workspaces & Projects:** Organize your team into dedicated workspaces and isolated projects.
+- **Task Management:** Create, assign, prioritize, and track tasks with intuitive data tables.
+- **Role-Based Access Control (RBAC):** Secure authorization differentiating between Admins and Members.
+- **Premium UI/UX:** A highly responsive, fast, and sleek dark-mode design system with micro-animations and glassmorphism accents.
+- **Authentication:** Secure JWT-based authentication system.
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, Vite, React Router v6 |
-| Backend | Node.js, Express |
-| Database | SQLite (via better-sqlite3) |
-| Auth | JWT + bcryptjs |
-| Styling | Pure CSS — Glassmorphism design system |
-| Deployment | Railway |
-
-## 🚀 Local Development
-
-### Prerequisites
-- Node.js 18+
+### Frontend
+- **Framework:** React 18 + Vite
+- **Styling:** Vanilla CSS with custom design system variables
+- **Routing:** React Router DOM v6
+- **Data Visualization:** Recharts
+- **Icons:** Lucide React
 
 ### Backend
-```bash
-cd backend
-npm install
-# create .env from .env.example
-cp .env.example .env
-# Edit JWT_SECRET to a random string
-npm run dev
-```
-Backend runs on **http://localhost:5000**
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MongoDB (Mongoose ORM)
+- **Authentication:** JSON Web Tokens (JWT) & bcrypt
 
-### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-Frontend runs on **http://localhost:5173**
-The Vite dev server proxies `/api` requests to the backend automatically.
+## 🚀 Getting Started
 
-## 🌐 Deploy to Railway
+Follow these instructions to get a local copy of the project up and running.
 
-### Backend Service
-1. Create a new Railway project
-2. Add a service from your GitHub repo, set **Root Directory** to `backend`
-3. Add environment variables:
-   - `JWT_SECRET` = a long random string
-   - `PORT` = 5000 (or Railway will set this automatically)
-4. Deploy — Railway auto-detects Node.js
+### Prerequisites
 
-### Frontend Service
-1. Add another service in the same Railway project, set **Root Directory** to `frontend`
-2. Add environment variables:
-   - `VITE_API_URL` = `https://your-backend-service.railway.app/api`
-3. Deploy
+- [Node.js](https://nodejs.org/en/) (v16 or higher)
+- [MongoDB](https://www.mongodb.com/) (Local instance or MongoDB Atlas cluster)
 
-## 📡 REST API
+### Installation
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/api/auth/register` | — | Register new user |
-| POST | `/api/auth/login` | — | Login |
-| GET | `/api/auth/me` | ✅ | Current user |
-| GET | `/api/auth/users` | ✅ | All users (for assigning) |
-| GET | `/api/projects` | ✅ | My projects |
-| POST | `/api/projects` | ✅ | Create project |
-| GET | `/api/projects/:id` | ✅ | Project detail + tasks |
-| PUT | `/api/projects/:id` | ✅ Admin | Update project |
-| DELETE | `/api/projects/:id` | ✅ Admin | Delete project |
-| POST | `/api/projects/:id/members` | ✅ Admin | Add member |
-| DELETE | `/api/projects/:id/members/:uid` | ✅ Admin | Remove member |
-| GET | `/api/tasks` | ✅ | List tasks (filterable) |
-| POST | `/api/tasks` | ✅ | Create task |
-| PUT | `/api/tasks/:id` | ✅ | Update task |
-| DELETE | `/api/tasks/:id` | ✅ | Delete task |
-| GET | `/api/dashboard` | ✅ | Dashboard stats |
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/sagarnishad2526-code/Team-Task-Manager.git
+   cd Team-Task-Manager
+   ```
+
+2. **Backend Setup:**
+   ```bash
+   cd backend
+   npm install
+   ```
+   Create a `.env` file in the `backend` directory:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_super_secret_key
+   ```
+   Start the backend server:
+   ```bash
+   npm run dev
+   ```
+
+3. **Frontend Setup:**
+   Open a new terminal and navigate to the frontend directory:
+   ```bash
+   cd frontend
+   npm install
+   ```
+   Start the Vite development server:
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the application:**
+   Open your browser and navigate to `http://localhost:5173`.
 
 ## 📁 Project Structure
 
 ```
-team-task-manager/
+Team-Task-Manager/
 ├── backend/
 │   ├── src/
-│   │   ├── app.js          # Express app + dashboard route
-│   │   ├── db.js           # SQLite schema & connection
-│   │   ├── middleware/
-│   │   │   └── auth.js     # JWT middleware
-│   │   └── routes/
-│   │       ├── auth.js
-│   │       ├── projects.js
-│   │       └── tasks.js
-│   ├── .env.example
+│   │   ├── app.js         # Main Express application entry point
+│   │   ├── models/        # Mongoose schemas (User, Task, Project, Workspace)
+│   │   └── ...
 │   ├── package.json
-│   └── railway.toml
+│   └── .env               
 └── frontend/
     ├── src/
-    │   ├── pages/
-    │   │   ├── Login.jsx
-    │   │   ├── Register.jsx
-    │   │   ├── Dashboard.jsx
-    │   │   ├── Projects.jsx
-    │   │   └── ProjectDetail.jsx
-    │   ├── App.jsx
-    │   ├── AuthContext.jsx
-    │   ├── api.js
-    │   ├── index.css
-    │   └── main.jsx
+    │   ├── components/    # Reusable UI components
+    │   ├── pages/         # Application views (Dashboard, Projects, etc.)
+    │   ├── App.jsx        # React application root
+    │   ├── index.css      # Global design system & theme variables
+    │   └── api.js         # Axios interceptors and API configuration
     ├── index.html
-    ├── vite.config.js
-    ├── package.json
-    └── railway.toml
+    └── vite.config.js
 ```
 
-## 👥 Role-Based Access
+## 🤝 Contributing
 
-| Action | Member | Admin |
-|--------|--------|-------|
-| View own projects | ✅ | ✅ |
-| Create projects | ✅ | ✅ |
-| Edit/Delete own project | ✅ | ✅ |
-| Edit/Delete any project | ❌ | ✅ |
-| Add members to project | Project Admin only | ✅ |
-| Create tasks | ✅ | ✅ |
-| Update own tasks | ✅ | ✅ |
-| Delete any task | ❌ | ✅ |
+Contributions, issues, and feature requests are welcome!
+Feel free to check the [issues page](https://github.com/sagarnishad2526-code/Team-Task-Manager/issues).
+
+## 📝 License
+
+This project is licensed under the MIT License.
