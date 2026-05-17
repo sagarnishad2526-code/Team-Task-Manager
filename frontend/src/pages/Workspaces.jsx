@@ -124,14 +124,14 @@ function WorkspaceCard({ workspace, onClick }) {
     <div
       onClick={onClick}
       style={{
-        background: '#111113', border: '1px solid #27272a',
-        borderLeft: '3px solid #6366f1',
+        background: 'var(--surface-1)', border: '1px solid var(--border)',
+        borderLeft: '3px solid var(--accent)',
         borderRadius: 'var(--radius)', cursor: 'pointer',
         padding: '1.5rem', position: 'relative', overflow: 'hidden',
-        transition: 'all 0.2s',
+        transition: 'all 0.2s', boxShadow: 'var(--shadow-card)',
       }}
-      onMouseEnter={e => { e.currentTarget.style.background = '#18181b'; e.currentTarget.style.borderColor = '#3f3f46'; }}
-      onMouseLeave={e => { e.currentTarget.style.background = '#111113'; e.currentTarget.style.borderColor = '#27272a'; }}
+      onMouseEnter={e => { e.currentTarget.style.background = 'var(--surface-2)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
+      onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-1)'; e.currentTarget.style.boxShadow = 'var(--shadow-card)'; }}
     >
       <h3 style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '1rem', lineHeight: 1.3, marginBottom: '0.5rem' }}>
         {workspace.name}
@@ -152,21 +152,21 @@ function WorkspaceCard({ workspace, onClick }) {
         </span>
       </div>
       
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #1e1e21', paddingTop: '0.75rem', marginTop: 'auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: '0.75rem', marginTop: 'auto' }}>
         <div style={{ display: 'flex', gap: '6px' }}>
           {workspace.category && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.63rem', fontWeight: 700, padding: '2px 7px', borderRadius: '4px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.63rem', fontWeight: 700, padding: '2px 7px', borderRadius: '4px', background: 'var(--accent-subtle)', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
               <Tag size={9} /> {workspace.category}
             </span>
           )}
           {workspace.visibility && (
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.63rem', fontWeight: 600, padding: '2px 7px', borderRadius: '4px', background: '#18181b', color: 'var(--text-muted)', textTransform: 'uppercase', border: '1px solid #27272a' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.63rem', fontWeight: 600, padding: '2px 7px', borderRadius: '4px', background: 'var(--surface-2)', color: 'var(--text-muted)', textTransform: 'uppercase', border: '1px solid var(--border)' }}>
               <Eye size={9} /> {workspace.visibility}
             </span>
           )}
         </div>
         {workspace.createdAt && (
-          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', color: '#3f3f46' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.7rem', color: 'var(--text-subtle)' }}>
             <CalendarDays size={11} /> {new Date(workspace.createdAt).toLocaleDateString()}
           </span>
         )}
@@ -211,8 +211,8 @@ export default function Workspaces() {
       ) : workspaces.length === 0 ? (
         <div style={{
           textAlign: 'center', padding: '5rem 2rem',
-          background: '#111113', border: '1px solid #27272a', borderRadius: 'var(--radius)',
-          animation: 'fadeUp 0.5s ease forwards',
+          background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: 'var(--radius)',
+          animation: 'fadeUp 0.5s ease forwards', boxShadow: 'var(--shadow-card)',
         }}>
           <Building2 size={48} color="var(--text-muted)" style={{ marginBottom: '1rem', opacity: 0.5 }} />
           <h3 style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>No workspaces yet</h3>

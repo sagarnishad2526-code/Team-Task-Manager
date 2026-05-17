@@ -110,8 +110,8 @@ export default function Register() {
                     onClick={() => setRole(r.val)}
                     style={{
                       padding: '12px', borderRadius: '10px', cursor: 'pointer',
-                      background: role === r.val ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.04)',
-                      border: role === r.val ? '1.5px solid var(--accent)' : '1px solid var(--glass-border)',
+                      background: role === r.val ? 'var(--accent-subtle)' : 'var(--surface-2)',
+                      border: role === r.val ? '1.5px solid var(--accent)' : '1px solid var(--border)',
                       color: role === r.val ? 'var(--text-primary)' : 'var(--text-secondary)',
                       textAlign: 'left', transition: 'all 0.2s', fontFamily: 'inherit',
                     }}

@@ -25,8 +25,8 @@ function ProjectCard({ project, onDelete }) {
   
   return (
     <div style={{
-      background: '#111113',
-      border: `1px solid #27272a`,
+      background: 'var(--surface-1)',
+      border: `1px solid var(--border)`,
       borderLeft: `3px solid ${sc}`,
       borderRadius: 'var(--radius)',
       padding: '1.5rem',
@@ -35,9 +35,10 @@ function ProjectCard({ project, onDelete }) {
       display: 'flex',
       flexDirection: 'column',
       transition: 'all 0.2s',
+      boxShadow: 'var(--shadow-card)',
     }}
-    onMouseEnter={e => { e.currentTarget.style.background = '#18181b'; e.currentTarget.style.borderColor = '#3f3f46'; }}
-    onMouseLeave={e => { e.currentTarget.style.background = '#111113'; e.currentTarget.style.borderColor = '#27272a'; }}
+    onMouseEnter={e => { e.currentTarget.style.background = 'var(--surface-2)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
+    onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-1)'; e.currentTarget.style.boxShadow = 'var(--shadow-card)'; }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem', gap: '10px' }}>
         <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, flex: 1, wordBreak: 'break-word' }}>
@@ -69,7 +70,7 @@ function ProjectCard({ project, onDelete }) {
         {project.description || 'No description provided.'}
       </p>
       
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid #1e1e21' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
         {project.priority && (
           <div style={{ fontSize: '0.75rem', color: pm.color, fontWeight: 600, background: pm.color + '15', padding: '2px 8px', borderRadius: '6px' }}>
             {pm.label} Priority
@@ -229,23 +230,23 @@ export default function Projects() {
         <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
           {/* View toggle — shown to all users */}
           <div style={{
-            display: 'flex', background: '#111113', borderRadius: '8px',
-            border: '1px solid #27272a', overflow: 'hidden'
+            display: 'flex', background: 'var(--surface-1)', borderRadius: '8px',
+            border: '1px solid var(--border)', overflow: 'hidden'
           }}>
             <button
               onClick={() => setViewAll(false)}
               style={{
                 padding: '7px 14px', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'inherit',
-                background: !viewAll ? 'rgba(99,102,241,0.15)' : 'transparent',
-                color: !viewAll ? '#6366f1' : '#71717a',
+                background: !viewAll ? 'var(--accent-subtle)' : 'transparent',
+                color: !viewAll ? 'var(--accent)' : 'var(--text-muted)',
                 transition: 'all 0.15s'
               }}>My Projects</button>
             <button
               onClick={() => setViewAll(true)}
               style={{
                 padding: '7px 14px', border: 'none', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600, fontFamily: 'inherit',
-                background: viewAll ? 'rgba(99,102,241,0.15)' : 'transparent',
-                color: viewAll ? '#6366f1' : '#71717a',
+                background: viewAll ? 'var(--accent-subtle)' : 'transparent',
+                color: viewAll ? 'var(--accent)' : 'var(--text-muted)',
                 transition: 'all 0.15s'
               }}>All Projects</button>
           </div>
@@ -261,7 +262,7 @@ export default function Projects() {
           {[1,2,3].map(i => <div key={i} className="skeleton" style={{ height: '150px', width: '300px', borderRadius: '12px' }} />)}
         </div>
       ) : projects.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '4rem 2rem', background: '#111113', borderRadius: '16px', border: '1px dashed #27272a' }}>
+        <div style={{ textAlign: 'center', padding: '4rem 2rem', background: 'var(--surface-1)', borderRadius: '16px', border: '1px dashed var(--border)', boxShadow: 'var(--shadow-card)' }}>
           <FolderOpen size={48} color="var(--text-muted)" style={{ marginBottom: '1rem', opacity: 0.5 }} />
           <h3 style={{ color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
             {!viewAll ? 'No projects in your workspaces yet' : 'No projects found'}

@@ -147,11 +147,14 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 const PORT = process.env.PORT || 5000;
 
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT) {
-  app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+const fs = require('fs');
+const frontendDistPath = path.join(__dirname, '../../frontend/dist');
+
+// Serve frontend
+if (process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT || fs.existsSync(frontendDistPath)) {
+  app.use(express.static(frontendDistPath));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+    res.sendFile(path.join(frontendDistPath, 'index.html'));
   });
 }
 
