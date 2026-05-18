@@ -31,7 +31,7 @@ function Avatar({ name, size = 28 }) {
       background: `hsl(${hue},55%,45%)`,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       fontSize: size * 0.38, fontWeight: 700, color: 'white',
-      border: '2px solid rgba(255,255,255,0.15)',
+      border: '2px solid var(--glass-border)',
       title: name,
     }}>{initials}</div>
   );
@@ -55,7 +55,7 @@ function TaskCard({ task, onClick }) {
     <div
       onClick={onClick}
       style={{
-        background: 'rgba(255,255,255,0.05)',
+        background: 'var(--surface-1)',
         backdropFilter: 'blur(10px)',
         border: `1px solid ${overdue ? 'rgba(239,68,68,0.4)' : 'var(--glass-border)'}`,
         borderLeft: `3px solid ${pm.color}`,
@@ -65,8 +65,8 @@ function TaskCard({ task, onClick }) {
         transition: 'all 0.2s',
         boxShadow: overdue ? '0 2px 12px rgba(239,68,68,0.15)' : 'none',
       }}
-      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.09)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 24px rgba(0,0,0,0.3)`; }}
-      onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = overdue ? '0 2px 12px rgba(239,68,68,0.15)' : 'none'; }}
+      onMouseEnter={e => { e.currentTarget.style.background = 'var(--surface-2)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = 'var(--shadow-lg)'; }}
+      onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-1)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = overdue ? '0 2px 12px rgba(239,68,68,0.15)' : 'none'; }}
     >
       <p style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem', marginBottom: '0.6rem', lineHeight: 1.4 }}>
         {task.title}
@@ -75,7 +75,7 @@ function TaskCard({ task, onClick }) {
         <Badge label={pm.label} color={pm.color} />
         {overdue && <Badge label="Overdue" color="#ef4444" />}
         {task.tags?.map(t => (
-          <span key={t} style={{ fontSize: '0.65rem', fontWeight: 600, padding: '2px 6px', borderRadius: '6px', background: 'rgba(255,255,255,0.06)', color: 'var(--text-secondary)', textTransform: 'lowercase' }}>#{t}</span>
+          <span key={t} style={{ fontSize: '0.65rem', fontWeight: 600, padding: '2px 6px', borderRadius: '6px', background: 'var(--surface-2)', color: 'var(--text-secondary)', textTransform: 'lowercase' }}>#{t}</span>
         ))}
       </div>
       {(task.assignee_name || task.due_date) && (
@@ -279,7 +279,7 @@ function TaskDetailModal({ task, canDelete, onClose, onStatusChange, onDelete, o
             <Badge label={pm.label} color={pm.color} />
             {overdue && <Badge label="Overdue" color="#ef4444" />}
             {task.tags?.map(t => (
-              <span key={t} style={{ fontSize: '0.68rem', fontWeight: 600, padding: '2px 8px', borderRadius: '8px', background: 'rgba(255,255,255,0.1)', color: 'var(--text-secondary)', textTransform: 'lowercase' }}>#{t}</span>
+              <span key={t} style={{ fontSize: '0.68rem', fontWeight: 600, padding: '2px 8px', borderRadius: '8px', background: 'var(--surface-2)', color: 'var(--text-secondary)', textTransform: 'lowercase' }}>#{t}</span>
             ))}
           </div>
           <h3 style={{ fontWeight: 800, color: 'var(--text-primary)', fontSize: '1.2rem', lineHeight: 1.3, paddingRight: '2rem' }}>
@@ -323,7 +323,7 @@ function TaskDetailModal({ task, canDelete, onClose, onStatusChange, onDelete, o
               task.comments?.map(c => (
                 <div key={c.id} style={{ display: 'flex', gap: '10px' }}>
                   <Avatar name={c.user_name} size={28} />
-                  <div style={{ flex: 1, background: 'rgba(255,255,255,0.03)', padding: '10px 12px', borderRadius: '0 12px 12px 12px', border: '1px solid var(--glass-border)' }}>
+                  <div style={{ flex: 1, background: 'var(--surface-1)', padding: '10px 12px', borderRadius: '0 12px 12px 12px', border: '1px solid var(--glass-border)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                       <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)' }}>{c.user_name}</span>
                       <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{new Date(c.created_at).toLocaleDateString()}</span>
@@ -438,7 +438,7 @@ export default function ProjectDetail() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
               <h2 style={{ fontWeight: 800, fontSize: '1.8rem', color: 'var(--text-primary)', letterSpacing: '-0.5px', margin: 0 }}>{project.name}</h2>
               {project.status && (
-                <span style={{ fontSize: '0.7rem', fontWeight: 700, padding: '4px 10px', borderRadius: '12px', background: 'rgba(255,255,255,0.08)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 700, padding: '4px 10px', borderRadius: '12px', background: 'var(--surface-2)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
                   {project.status}
                 </span>
               )}
@@ -464,7 +464,7 @@ export default function ProjectDetail() {
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1, maxWidth: '300px' }}>
-                <div style={{ flex: 1, background: 'rgba(255,255,255,0.08)', borderRadius: '4px', height: '5px', overflow: 'hidden' }}>
+                <div style={{ flex: 1, background: 'var(--surface-3)', borderRadius: '4px', height: '5px', overflow: 'hidden' }}>
                   <div style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))', height: '100%', width: `${pct}%`, borderRadius: '4px', transition: 'width 0.6s ease' }} />
                 </div>
                 <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)' }}>{pct}%</span>
@@ -487,7 +487,7 @@ export default function ProjectDetail() {
           {project.members?.map(m => (
             <div key={m.id} style={{
               display: 'flex', alignItems: 'center', gap: '6px',
-              background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)',
+              background: 'var(--surface-2)', border: '1px solid var(--glass-border)',
               borderRadius: '20px', padding: '4px 12px 4px 5px',
             }}>
               <Avatar name={m.name} size={22} />
@@ -507,7 +507,7 @@ export default function ProjectDetail() {
           const tasks = tasksByStatus[status];
           return (
             <div key={status} style={{
-              background: 'rgba(255,255,255,0.03)',
+              background: 'var(--surface-1)',
               backdropFilter: 'blur(12px)',
               border: '1px solid var(--glass-border)',
               borderTop: `2px solid ${sm.color}`,
@@ -538,7 +538,7 @@ export default function ProjectDetail() {
                 {tasks.length === 0 && (
                   <div style={{
                     textAlign: 'center', padding: '2rem 0', color: 'var(--text-muted)',
-                    fontSize: '0.8rem', border: '1px dashed rgba(255,255,255,0.08)', borderRadius: '10px',
+                    fontSize: '0.8rem', border: '1px dashed var(--border)', borderRadius: '10px',
                   }}>
                     No tasks here
                   </div>

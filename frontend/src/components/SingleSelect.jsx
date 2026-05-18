@@ -66,7 +66,7 @@ export default function SingleSelect({ options, value, onChange, placeholder = "
         <div style={{
           position: 'absolute',
           top: '100%', left: 0, right: 0,
-          background: 'rgba(15, 23, 42, 0.95)',
+          background: 'var(--modal-bg)',
           backdropFilter: 'blur(20px)',
           border: '1px solid var(--glass-border)',
           borderRadius: '8px',
@@ -74,7 +74,7 @@ export default function SingleSelect({ options, value, onChange, placeholder = "
           maxHeight: '200px',
           overflowY: 'auto',
           zIndex: 50,
-          boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+          boxShadow: 'var(--shadow-lg)'
         }}>
           {filteredOptions.length === 0 ? (
             <div style={{ padding: '12px', color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center' }}>
@@ -91,15 +91,15 @@ export default function SingleSelect({ options, value, onChange, placeholder = "
                   style={{
                     padding: '10px 12px',
                     cursor: 'pointer',
-                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    borderBottom: '1px solid var(--border-light)',
                     color: isSelected ? 'var(--accent)' : 'var(--text-primary)',
-                    background: isSelected ? 'rgba(99,102,241,0.1)' : 'transparent',
+                    background: isSelected ? 'var(--accent-subtle)' : 'transparent',
                     fontSize: '0.9rem',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center'
                   }}
-                  onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
+                  onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = 'var(--surface-2)'; }}
                   onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.background = 'transparent'; }}
                 >
                   <div>

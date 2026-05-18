@@ -22,7 +22,7 @@ function Avatar({ name, size = 28 }) {
       background: `hsl(${hue},55%,45%)`,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       fontSize: size * 0.38, fontWeight: 700, color: 'white',
-      border: '2px solid rgba(255,255,255,0.15)',
+      border: '2px solid var(--glass-border)',
     }}>
       {initials}
     </div>
@@ -132,7 +132,7 @@ function AddMemberModal({ workspace, allUsers, onClose, onAdded }) {
               {['member', 'admin'].map(r => (
                 <button key={r} type="button" onClick={() => setRole(r)} style={{
                   padding: '10px', borderRadius: '10px', cursor: 'pointer', fontFamily: 'inherit',
-                  background: role === r ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.04)',
+                  background: role === r ? 'var(--accent-subtle)' : 'var(--surface-1)',
                   border: role === r ? '1.5px solid var(--accent)' : '1px solid var(--glass-border)',
                   color: role === r ? 'var(--text-primary)' : 'var(--text-secondary)',
                   fontWeight: 600, fontSize: '0.875rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
@@ -282,7 +282,7 @@ function ProjectCard({ project, onClick, onUnlink }) {
           <span style={{ fontSize: '0.73rem', color: 'var(--text-muted)' }}>Progress</span>
           <span style={{ fontSize: '0.73rem', fontWeight: 700, color: pct === 100 ? 'var(--done)' : 'var(--text-secondary)' }}>{pct}%</span>
         </div>
-        <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '4px', height: '5px', overflow: 'hidden' }}>
+        <div style={{ background: 'var(--surface-3)', borderRadius: '4px', height: '5px', overflow: 'hidden' }}>
           <div style={{
             background: pct === 100 ? 'var(--done)' : 'linear-gradient(90deg, var(--accent), var(--accent-2))',
             height: '100%', width: `${pct}%`, borderRadius: '4px', transition: 'width 0.6s ease',
@@ -387,7 +387,7 @@ export default function WorkspaceDetail() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <h2 style={{ fontWeight: 800, fontSize: '1.8rem', color: 'var(--text-primary)', letterSpacing: '-0.5px' }}>{workspace.name}</h2>
               {workspace.owner_name && (
-                <span style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.05)', padding: '4px 10px', borderRadius: '12px', color: 'var(--text-secondary)' }}>
+                <span style={{ fontSize: '0.75rem', background: 'var(--surface-2)', padding: '4px 10px', borderRadius: '12px', color: 'var(--text-secondary)' }}>
                   Created by <strong style={{ color: 'var(--text-primary)' }}>{workspace.owner_name}</strong>
                 </span>
               )}
@@ -401,7 +401,7 @@ export default function WorkspaceDetail() {
                 </span>
               )}
               {workspace.visibility && (
-                <span style={{ fontSize: '0.7rem', fontWeight: 700, padding: '3px 10px', borderRadius: '12px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 700, padding: '3px 10px', borderRadius: '12px', background: 'var(--surface-2)', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
                   {workspace.visibility}
                 </span>
               )}
@@ -488,7 +488,7 @@ export default function WorkspaceDetail() {
             </thead>
             <tbody>
               {workspace.members?.map(m => (
-                <tr key={m.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                <tr key={m.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
                   <td style={{ padding: '1rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <Avatar name={m.name} size={32} />
@@ -501,7 +501,7 @@ export default function WorkspaceDetail() {
                   <td style={{ padding: '1rem' }}>
                     <span style={{
                       fontSize: '0.7rem', fontWeight: 700, padding: '3px 10px', borderRadius: '12px',
-                      background: m.workspace_role === 'admin' ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.08)',
+                      background: m.workspace_role === 'admin' ? 'var(--accent-subtle)' : 'var(--surface-2)',
                       color: m.workspace_role === 'admin' ? 'var(--accent)' : 'var(--text-secondary)',
                       textTransform: 'uppercase'
                     }}>
