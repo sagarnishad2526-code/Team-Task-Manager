@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect DB
+// Connect DB (Vercel Redeploy Trigger)
 connectDB();
 
 app.use('/api/auth', require('./routes/auth'));
