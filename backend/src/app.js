@@ -76,8 +76,8 @@ app.get('/api/dashboard', auth, async (req, res) => {
       status: t.status,
       priority: t.priority,
       due_date: t.due_date,
-      project_id: t.project_id._id.toString(),
-      project_name: t.project_id.name
+      project_id: t.project_id ? t.project_id._id.toString() : null,
+      project_name: t.project_id ? t.project_id.name : 'Unknown Project'
     }));
 
     const now = new Date().toISOString().split('T')[0];
@@ -139,6 +139,7 @@ app.get('/api/dashboard', auth, async (req, res) => {
       completionRate,
     });
   } catch (err) {
+    console.error('Dashboard Error:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -158,4 +159,8 @@ if (process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT || 
   });
 }
 
-app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
+}
+
+module.exports = app;
